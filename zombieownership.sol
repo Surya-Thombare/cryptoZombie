@@ -5,7 +5,6 @@ import "./erc721.sol";
 
 contract ZombieOwnership is ZombieAttack, ERC721 {
 
-  // 1. Define mapping here
   mapping (uint => address) zombieApprovals;
 
   function balanceOf(address _owner) external view returns (uint256) {
@@ -28,8 +27,11 @@ contract ZombieOwnership is ZombieAttack, ERC721 {
     _transfer(_from, _to, _tokenId);
   }
 
-  function approve(address _approved, uint256 _tokenId) external payable {
-
+  // 1. Add function modifier here
+  function approve(address _approved, uint256 _tokenId) external payable onlyOwnerOf(_tokenId) {
+    zombieApprovals[_tokenId] = _approved;
+    // 2. Define function here
   }
+
 
 }
